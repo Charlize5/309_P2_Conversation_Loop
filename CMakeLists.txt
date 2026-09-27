@@ -14,7 +14,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address,undefin
 
 include_directories(include)
 
-# 1. Define the core files (everything EXCEPT main.cpp).
+# 1. Define the core files (everything EXCEPT main.cpp). //I will not make any new cpp files, so this wont change 
 set(CORE_SOURCES
     src/conversation.cpp
     src/sentinel_scanner.cpp
@@ -23,6 +23,7 @@ set(CORE_SOURCES
     src/replay_client.cpp
     src/harness.cpp
 )
+#^^ No new source files, the cpp files will be named as written above
 
 # 2. Build the main program.
 add_executable(miniharness ${CORE_SOURCES} src/main.cpp)
