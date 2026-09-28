@@ -73,7 +73,17 @@ const Message* original_data = a.begin(); //buffer locale
     assert(b.at(0).content() == "hello");
     assert(b.at(1).content() == "hi there");
 }
-
+TEST(GROWTHFACTOR) {
+    Conversation c;
+    for (std::size_t i = 0; i < 1000; ++i) {
+        const Message* before = c.begin();
+        c.append(Message(Role::User, "m"));
+        bool reallocated = (c.begin() != before);
+      
+        bool expected = (i == 0) || ((i & (i - 1)) == 0); // powers of 2?
+        assert(reallocated == expected);//? is equal???
+    }
+}
 
 //copied from specs example loop, not my code
 TEST(ScannerCatchesSentinelAtEveryBoundary) { //copied
@@ -386,6 +396,7 @@ int main() { //run all tests, even the vs autofill ones, and print a generic pas
     TURNLIMIT();
     SENTINELHALT();
     ROUNDTRIP();
+    GROWTHFACTOR();
 std::cout << "all tests passed\n"; //generic pass message for the console 
     return 0;
 }
